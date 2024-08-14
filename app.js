@@ -2,6 +2,7 @@ import express from 'express'
 import mongoose from 'mongoose'
 import dotenv from 'dotenv'
 import authRouter from './routes/authRouter.js'
+import productRouter from './routes/productRoutes.js'
 import { notFound, errorHandler } from './middlewares/errorMiddleware.js'
 import cookieParser from 'cookie-parser'
 
@@ -17,6 +18,7 @@ app.use(express.urlencoded({extended: true}))
 
 // Parent Router
 app.use('/api/v1/auth', authRouter)
+app.use('/api/v1/product', productRouter)
 
 app.use(notFound)
 app.use(errorHandler)
