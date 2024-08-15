@@ -56,5 +56,18 @@ export const deleteProduct = asyncHandler(async (req, res) => {
 })
 
 export const fileUpload = asyncHandler(async (req, res) => {
-    res.send('file upload product')
+    const file = req.file
+
+    if (!file) {
+        res.status(400)
+        throw new Error('Upload file not found!')
+    }
+
+    const imageFileName = file.filename
+    const pathImageFile = `/uploads/${imageFileName}`
+
+    res.status(201).json({
+        message: 'Image upload file successfully',
+        iamge: pathImageFile
+    })
 })
