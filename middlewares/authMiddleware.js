@@ -22,3 +22,12 @@ export const protectedMiddleware = asycnHandler(async (req, res, next) => {
         throw new Error('Unauthorized, token not found!')
     }
 })
+
+export const adminMiddleware = (req, res, next) => {
+    if (req.user && req.user.role === 'owner') {
+        next()
+    } else {
+        res.status(401)
+        throw new Error('You don\'t have access!')
+    }
+}

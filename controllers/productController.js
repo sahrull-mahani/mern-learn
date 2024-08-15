@@ -34,11 +34,25 @@ export const detailProduct = asyncHandler(async (req, res) => {
 })
 
 export const updateProduct = asyncHandler(async (req, res) => {
-    res.send('udpate product')
+    const id = req.params.id
+    const product = await Product.findByIdAndUpdate(id, req.body, {
+        runValidators:false,
+        new: true
+    })
+    
+    return res.status(200).json({
+        message: 'Update product berhasil',
+        data: product
+    })
 })
 
 export const deleteProduct = asyncHandler(async (req, res) => {
-    res.send('delete product')
+    const id = req.params.id
+    await Product.findByIdAndDelete(id)
+
+    return res.status(200).json({
+        message: 'Delete succesfully',
+    })
 })
 
 export const fileUpload = asyncHandler(async (req, res) => {
